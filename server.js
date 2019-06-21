@@ -66,19 +66,9 @@ io.on("connection", socket => {
 
   socket.on("undo", async steps => {
     try {
-      
-    
-      const truncate = await State.find()
-        .sort("-time")
-        .limit(steps)
-        .exec();
 
-      const ids = truncate.map(elem => {
-        return elem._id;
-      });
-      console.log("TCL: truncateIds", ids);
-      const delstate = await State.deleteMany({ _id: { $in: ids } }).exec();
-      console.log("TCL: delstate", delstate.deletedCount);
+      const findAndDelete = await State.findOneAndDelete({}, {"sort": {"_id": -1}}).exec()
+      // console.log("TCL: findAndDelete", findAndDelete)
       const state = await State.find()
         .sort("-time")
         .limit(1)
@@ -88,7 +78,6 @@ io.on("connection", socket => {
       io.sockets.emit("init", { cells:state[0].state });
     } catch (err) {
       console.log("TCL: err", err)
-      
     }
   });
 });
