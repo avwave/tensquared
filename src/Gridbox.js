@@ -37,6 +37,7 @@ class Gridbox extends Component {
       this.setState({cells})
     })
   }
+
   send = (value, x, y) => {
     const currentCell = this.state.cells[x][y]
     let color = this.state.onColor;
@@ -52,6 +53,10 @@ class Gridbox extends Component {
     const cells = this.state.cells
     cells[x][y] = { ...col };
     this.setState({cells})
+  }
+
+  undo = (steps) => {
+    this.socket.emit('undo', steps)
   }
 
   renderCells = () => {
@@ -76,9 +81,13 @@ class Gridbox extends Component {
   }
   render() {
     return (
-      <div style={styles.squaregrid}>
-        {this.renderCells()}
-    </div>
+      <div>
+        <button onClick={() => this.undo(1)}>Undo
+        </button>
+        <div style={styles.squaregrid}>
+          {this.renderCells()}
+      </div>
+      </div>
     )
   }
 }
