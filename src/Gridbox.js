@@ -23,7 +23,7 @@ class Gridbox extends Component {
     this.state = {
       onColor: 'red',
       offColor: 'green',
-      cells: Array(100).fill().map(() => Array(100).fill({col:'green'}))
+      cells: []
     };
     this.socket = socketIOClient(ENDPOINT)
   }
@@ -55,6 +55,10 @@ class Gridbox extends Component {
   }
 
   renderCells = () => {
+    if (this.state.cells === []) {
+      return <h2>loading</h2>
+    }
+    console.log("TCL: renderCells -> this.state", this.state)
     return this.state.cells.map((row, x) => {
       return (
         row.map((cell, y) => {
