@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "concurrently": "^4.1.0",
     "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -10,7 +11,7 @@
     "socket.io": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently 'nodemon ./server.js -e js ' 'react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -29,5 +30,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "nodemonConfig": {
+    "ignore": ["src/"],
+    "verbose": true
   }
 }
