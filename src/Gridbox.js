@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import socketIOClient from 'socket.io-client'
 
-const ENDPOINT = 'http://localhost:8010'
+const ENDPOINT = 'https://tensquared.herokuapp.com/:8010'
 
 const styles = {
   squaregrid: {
