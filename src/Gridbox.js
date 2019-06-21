@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import socketIOClient from 'socket.io-client'
 
-const ENDPOINT = 'https://tensquared.herokuapp.com/:8010'
-
 const styles = {
   squaregrid: {
     height: "auto",
@@ -20,7 +18,7 @@ class Gridbox extends Component {
     this.state = {
       cells: new Array(10000).fill(false)
     };
-    this.socket = socketIOClient(ENDPOINT)
+    this.socket = socketIOClient()
   }
 
   componentDidMount() {
