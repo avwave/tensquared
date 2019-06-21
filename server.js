@@ -1,27 +1,24 @@
 const express = require('express')
-const http = require('http')
 const socketIO = require('socket.io')
 
-
-const port = '8010'
-
+const port = process.env.PORT|| 8081
 const app = express()
 
-const server = http.createServer(app)
+const server = require('http').Server(app)
 
-const io = socketIO(server)
+const io = module.exports.io = socketIO(server)
+app.use(express.static(__dirname + '/build'))
+const cells = Array(100).fill().map(() => Array(100).fill({col:'green'}))
 
-const cells = new Array(10000).fill(false)
 
 io.on('connection', socket => {
   io.sockets.emit('init', {cells})
   socket.on('disconnect', () => {
     
   })
-  socket.on('flip box', ({ value, index }) => {
-    console.log("TCL: value, index", value, index)
-    cells[index] = !cells[index]
-    io.sockets.emit('flip box', {value: cells[index], index})
+  socket.on('flip box', ({ x, y, color }) => {
+    cells[x][y] = color
+    io.sockets.emit('flip box', {x, y, value: cells[x][y]})
   })
 })
 

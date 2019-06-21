@@ -11,7 +11,8 @@
     "socket.io": "^2.2.0"
   },
   "scripts": {
-    "start": "concurrently 'nodemon ./server.js -e js ' 'react-scripts start'",
+    "start" : "node server.js",
+    "dev": "concurrently 'nodemon ./server.js -e js ' 'react-scripts start'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -33,9 +34,5 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
-  },
-  "nodemonConfig": {
-    "ignore": ["src/"],
-    "verbose": true
-  }
+  }  
 }

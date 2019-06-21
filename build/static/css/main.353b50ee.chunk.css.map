@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,QACE,qBACF,CACA,SACE,qBACF","file":"main.353b50ee.chunk.css","sourcesContent":[".onCell {\n  background-color: #c00;\n}\n.offCell {\n  background-color: #0c0;\n}"]}
