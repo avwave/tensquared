@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import socketIOClient from 'socket.io-client'
 
-// const ENDPOINT = 'http://localhost:8081'
-const ENDPOINT = '/'
+let ENDPOINT = '/';
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  ENDPOINT = 'http://localhost:8081'
+}
 
 const styles = {
   squaregrid: {
@@ -31,6 +33,7 @@ class Gridbox extends Component {
       this.flipCell(value, x, y)
     })
     this.socket.on('init', ({ cells }) => {
+      console.log("TCL: Gridbox -> cells", cells)
       this.setState({cells})
     })
   }
@@ -45,8 +48,9 @@ class Gridbox extends Component {
   }
 
   flipCell = (col, x, y) => {
+    console.log("TCL: flipCell -> col, x, y", col, x, y)
     const cells = this.state.cells
-    cells[x][y] = { col };
+    cells[x][y] = { ...col };
     this.setState({cells})
   }
 

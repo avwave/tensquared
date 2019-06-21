@@ -17,7 +17,7 @@ io.on('connection', socket => {
     
   })
   socket.on('flip box', ({ x, y, color }) => {
-    cells[x][y] = color
+    cells[x][y] = { col: color }
     io.sockets.emit('flip box', {x, y, value: cells[x][y]})
   })
 })
