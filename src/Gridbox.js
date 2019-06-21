@@ -11,14 +11,6 @@ const styles = {
     // gridTemplate: "repeat(10, 3vw) / repeat(10, 3vw)",
     gridGap: "1px"
   },
-  onCell: {
-    background: "#c00",
-    
-  },
-  offCell: {
-    background: "#0c0",
-    
-  }
 };
 
 class Gridbox extends Component {
@@ -52,8 +44,8 @@ class Gridbox extends Component {
   renderCells = () => {
     return this.state.cells.map((cell, i) => {
       return (
-        <div key={i}
-          style={cell?styles.onCell:styles.offCell}
+        <div key={`${i}-${cell?'1':'0'}`}
+          className={`${cell ? 'onCell' : 'offCell'}`}
           onClick={() => {
             this.send(!cell, i)
           }}></div>
